@@ -11,12 +11,6 @@ class AddReview extends HTMLElement {
     this.close = this.close.bind(this);
   }
 
-  attributeChangedCallback(attrName, oldValue, newValue) {
-    if (oldValue !== newValue) {
-      this[attrName] = this.hasAttribute(attrName);
-    }
-  }
-
   close() {
     if (this.open !== false) {
       this.open = false;
@@ -33,7 +27,6 @@ class AddReview extends HTMLElement {
 
   set open(isOpen) {
     this.querySelector(".wrapper").classList.toggle("open", isOpen);
-    this.querySelector(".wrapper").setAttribute("aria-hidden", !isOpen);
     if (isOpen) {
       this._wasFocused = document.activeElement;
       this.setAttribute("open", "");

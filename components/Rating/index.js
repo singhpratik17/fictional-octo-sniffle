@@ -15,7 +15,7 @@ class Rating extends HTMLElement {
         addClasses(event.target.id);
       };
       const handleMouseOut = (event) => {
-        addClasses(event.target.id);
+        removeClasses(event.target.id);
       };
       const allStars = document.querySelectorAll(".editable-star");
 
@@ -24,6 +24,14 @@ class Rating extends HTMLElement {
           if (parseInt(item.id) <= parseInt(index)) {
             item.classList.add("star-checked");
           } else {
+            item.classList.remove("star-checked");
+          }
+        });
+      };
+
+      const removeClasses = (index) => {
+        allStars.forEach((item) => {
+          if (parseInt(item.id) <= parseInt(index)) {
             item.classList.remove("star-checked");
           }
         });
