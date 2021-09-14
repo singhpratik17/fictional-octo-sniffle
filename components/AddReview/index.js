@@ -21,14 +21,10 @@ class AddReview extends HTMLElement {
     if (this.open !== false) {
       this.open = false;
     }
-    const closeEvent = new CustomEvent("dialog-closed");
-    this.dispatchEvent(closeEvent);
   }
 
   disconnectedCallback() {
-    this.shadowRoot
-      .querySelector(".overlay")
-      .removeEventListener("click", this.close);
+    this.querySelector(".overlay").removeEventListener("click", this.close);
   }
 
   get open() {
