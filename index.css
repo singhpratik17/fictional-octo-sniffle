@@ -33,3 +33,41 @@
     color: #000000;
     margin: 0;
 }
+
+.rating-row {
+    margin-top: 43px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.container {
+    margin-top: 118px;
+}
+
+.star-container-header {
+    margin-left: 24px;
+}
+
+.star {
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1);
+    color: #E0E0E0;
+    font-size: 28px;
+}
+
+.star-checked {
+    background: -webkit-linear-gradient(180deg, #FFCD69 0%, #FDCE71 100%);
+    background: linear-gradient(180deg, #FFCD69 0%, #FDCE71 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    color: transparent;
+}
+
+hr {
+    margin: 60px 0 40px 0;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #B9B9B9;
+}
