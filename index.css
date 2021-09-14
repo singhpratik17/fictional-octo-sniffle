@@ -38,6 +38,14 @@
     font-size: 28px;
 }
 
+.f-24 {
+    font-size: 24px;
+}
+
+.f-20 {
+    font-size: 20px;
+}
+
 .rating-row {
     margin-top: 43px;
 }
@@ -84,6 +92,7 @@ hr {
     border-radius: 4px;
     padding: 14px 18px;
     cursor: pointer;
+    display: inline-block;
 }
 
 .review-item {
@@ -103,4 +112,69 @@ hr {
 
 .rating-val {
     margin-right: 8px;
+}
+
+.add-review-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+}
+
+.add-review-open {
+    visibility: visible;
+}
+
+.wrapper {
+    opacity: 0;
+    transition: visibility 0s, opacity 0.25s ease-in;
+}
+
+.wrapper:not(.open) {
+    visibility: hidden;
+}
+
+.wrapper.open {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    position: fixed;
+    width: 100%;
+}
+
+.dialog {
+    background: #ffffff;
+    max-width: 680px;
+    position: fixed;
+    padding: 48px 53px;
+    border-radius: 20px;
+}
+
+.review-input {
+    outline: none !important;
+    border: none !important;
+    font-size: 20px;
+    color: #929292;
+    resize: none;
+}
+
+.mt-40{
+    margin-top: 40px;
 }

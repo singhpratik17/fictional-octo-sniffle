@@ -25,6 +25,11 @@ class ProductCard extends HTMLElement {
       }
     }
     this.render();
+
+    const button = document.getElementById("add-review-button");
+    button.addEventListener("click", () => {
+      document.querySelector("add-review").open = true;
+    });
   }
 
   render() {
@@ -37,7 +42,7 @@ class ProductCard extends HTMLElement {
               <p class="heading">${this.product.rating}</p>  
               <rating-c class="star-container-header" rating="${this.product.rating}"></rating-c>
             </div>    
-            <button-c label="Submit review"></button-c>  
+            <button-c label="Add review" id="add-review-button"></button-c>  
           </div>
           <hr />
         </div>

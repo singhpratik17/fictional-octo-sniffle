@@ -5,6 +5,7 @@ class Button extends HTMLElement {
   }
 
   async connectedCallback() {
+    this.label = this.getAttribute("label");
     this.render();
   }
 
