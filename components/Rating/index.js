@@ -5,7 +5,7 @@ class Rating extends HTMLElement {
     this.maxRating = 5;
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     this.rating = this.getAttribute("rating");
     this.render();
   }

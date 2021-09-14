@@ -1,25 +1,33 @@
 import { queryWrapper } from "../../apiConfig/index";
 import { GET_PRODUCT } from "../../apiConfig/queries";
 import "../Rating/index";
+import "../Button/index";
+import "../ReviewsList/index";
+import { ReviewsList } from "../ReviewsList";
 
 class ProductCard extends HTMLElement {
   constructor() {
     super();
-    this.product = {};
+    this.product = {
+      reviews: [],
+    };
+    this.reviewComp = "";
   }
 
   async connectedCallback() {
     const data = await queryWrapper(GET_PRODUCT, { productId: 1 });
     if (data) {
       this.product = data.product;
+      if (this.product.reviews.length) {
+        const ReviewList = new ReviewsList();
+        ReviewList.reviewsList = this.product.reviews;
+        this.reviewComp = ReviewList.render();
+      }
     }
     this.render();
   }
 
   render() {
-    const stars = Array.from({ length: 10 }).map((item, index) => {
-      return `<star-span id=${index} />`;
-    });
     this.innerHTML = `
       <div class="d-flex flex-column align-center container">
         <div class="d-flex flex-column">
@@ -29,8 +37,13 @@ class ProductCard extends HTMLElement {
               <p class="heading">${this.product.rating}</p>  
               <rating-c class="star-container-header" rating="${this.product.rating}"></rating-c>
             </div>    
+            <button-c label="Submit review"></button-c>  
           </div>
           <hr />
+        </div>
+        <div class="d-flex flex-column">
+          <h1 class="heading sub-heading bold">Reviews</h1>
+          ${this.reviewComp}
         </div>
       </div>
     `;

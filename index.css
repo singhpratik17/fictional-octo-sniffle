@@ -34,6 +34,10 @@
     margin: 0;
 }
 
+.sub-heading {
+    font-size: 28px;
+}
+
 .rating-row {
     margin-top: 43px;
 }
@@ -70,4 +74,33 @@ hr {
     height: 1px;
     border: 0;
     border-top: 1px solid #B9B9B9;
+}
+
+.btn {
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 14px 18px;
+    cursor: pointer;
+}
+
+.review-item {
+    margin-top: 29px;
+}
+
+.review-comment {
+    font-size: 20px;
+    line-height: 23px;
+    color: #929292;
+    margin: 0 0 0 29px;
+}
+
+.text-primary {
+    color: #000000;
+}
+
+.rating-val {
+    margin-right: 8px;
 }
