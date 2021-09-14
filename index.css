@@ -56,7 +56,7 @@
 
 .container {
     margin-top: 60px;
-    max-width: 564px;
+    max-width: 580px;
 }
 
 .star-container-header {
@@ -110,7 +110,7 @@ hr {
     line-height: 23px;
     color: #929292;
     margin: 0 0 0 29px;
-    max-width: 350px;
+    max-width: 400px;
 }
 
 .text-primary {
@@ -192,4 +192,14 @@ hr {
 
 .w-100 {
     width: 100%;
+}
+
+@media only screen and (min-device-width: 768px){
+    .dialog {
+        width: 680px;
+    }
+
+    .container {
+        width: 580px;
+    }
 }

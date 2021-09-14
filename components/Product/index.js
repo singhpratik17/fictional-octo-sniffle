@@ -48,7 +48,7 @@ class ProductCard extends HTMLElement {
             </div>
             <hr />
           </div>
-          <div class="d-flex flex-column">
+          <div class="d-flex flex-column w-100">
             <h1 class="heading sub-heading bold">Reviews</h1>
             <div class="reviews-container">
                 ${this.reviewComp}
