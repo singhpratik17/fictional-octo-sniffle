@@ -55,7 +55,8 @@
 }
 
 .container {
-    margin-top: 118px;
+    margin-top: 60px;
+    max-width: 564px;
 }
 
 .star-container-header {
@@ -95,6 +96,11 @@ hr {
     display: inline-block;
 }
 
+.reviews-container {
+    max-height: 40vh;
+    overflow-y: auto;
+}
+
 .review-item {
     margin-top: 29px;
 }
@@ -104,6 +110,7 @@ hr {
     line-height: 23px;
     color: #929292;
     margin: 0 0 0 29px;
+    max-width: 350px;
 }
 
 .text-primary {
@@ -181,4 +188,8 @@ hr {
 
 .pointer {
     cursor: pointer;
+}
+
+.w-100 {
+    width: 100%;
 }

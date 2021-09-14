@@ -1,5 +1,7 @@
 import "../Rating/index";
 import "../Button/index";
+import { queryWrapper } from "../../apiConfig";
+import { CREATE_REVIEW } from "../../apiConfig/mutation";
 
 class AddReview extends HTMLElement {
   static get observedAttributes() {
@@ -40,6 +42,24 @@ class AddReview extends HTMLElement {
 
   connectedCallback() {
     this.render();
+
+    const button = document.getElementById("submit-review-button");
+    button.addEventListener("click", async () => {
+      const allStars = document.querySelectorAll(
+        "#rating-element .star-checked"
+      );
+      const comment = document.getElementById("review-comment-input").value;
+      let productId = this.getAttribute("productId");
+      productId = parseInt(productId);
+      console.warn(productId);
+      await queryWrapper(CREATE_REVIEW, {
+        comment,
+        rating: allStars.length,
+        productId,
+      });
+      this.close();
+      window.location.reload();
+    });
   }
 
   render() {
@@ -52,12 +72,12 @@ class AddReview extends HTMLElement {
           <div class="d-flex flex-column">
             <h1 class="heading">What’s your rating?</h1>
             <p class="f-24 mt-40">Rating</p>
-            <rating-c class="pointer" mode="editable"></rating-c>
+            <rating-c id="rating-element" class="pointer" mode="editable"></rating-c>
             <p class="f-24 mt-40">Review</p>
             <textarea
             placeholder="Start typing..."
             rows="2" 
-            maxlength="180"
+            maxlength="120"
             class="review-input"
             id="review-comment-input"></textarea>
             <button-c label="Submit review" id="submit-review-button" class="mt-40"></button-c>  

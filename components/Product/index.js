@@ -3,6 +3,7 @@ import { GET_PRODUCT } from "../../apiConfig/queries";
 import "../Rating/index";
 import "../Button/index";
 import "../ReviewsList/index";
+import "../AddReview/index";
 import { ReviewsList } from "../ReviewsList";
 
 class ProductCard extends HTMLElement {
@@ -34,22 +35,27 @@ class ProductCard extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <div class="d-flex flex-column align-center container">
-        <div class="d-flex flex-column">
-          <h1 class="heading bold">${this.product.name}</h1>
-          <div class="d-flex justify-between rating-row align-center">
-            <div class="d-flex justify-start align-center">
-              <p class="heading">${this.product.rating}</p>  
-              <rating-c class="star-container-header" rating="${this.product.rating}"></rating-c>
-            </div>    
-            <button-c label="Add review" id="add-review-button"></button-c>  
+      <div class="d-flex flex-column align-center">
+        <div class="d-flex flex-column align-center container">
+          <div class="d-flex flex-column w-100">
+            <h1 class="heading bold">${this.product.name}</h1>
+            <div class="d-flex justify-between rating-row align-center">
+              <div class="d-flex justify-start align-center">
+                <p class="heading">${this.product.rating}</p>  
+                <rating-c class="star-container-header" rating="${this.product.rating}"></rating-c>
+              </div>    
+              <button-c label="Add review" id="add-review-button"></button-c>  
+            </div>
+            <hr />
           </div>
-          <hr />
+          <div class="d-flex flex-column">
+            <h1 class="heading sub-heading bold">Reviews</h1>
+            <div class="reviews-container">
+                ${this.reviewComp}
+            </div>
+          </div>
         </div>
-        <div class="d-flex flex-column">
-          <h1 class="heading sub-heading bold">Reviews</h1>
-          ${this.reviewComp}
-        </div>
+        <add-review id="add-review-modal" productId="${this.product.id}"></add-review>
       </div>
     `;
   }
