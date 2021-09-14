@@ -63,7 +63,7 @@ class AddReview extends HTMLElement {
           <div class="d-flex flex-column">
             <h1 class="heading">What’s your rating?</h1>
             <p class="f-24 mt-40">Rating</p>
-            <rating-c></rating-c>
+            <rating-c class="pointer" mode="editable"></rating-c>
             <p class="f-24 mt-40">Review</p>
             <textarea
             placeholder="Start typing..."

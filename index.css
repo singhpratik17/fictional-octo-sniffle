@@ -178,3 +178,7 @@ hr {
 .mt-40{
     margin-top: 40px;
 }
+
+.pointer {
+    cursor: pointer;
+}
