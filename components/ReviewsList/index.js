@@ -1,32 +1,26 @@
-export class ReviewsList extends HTMLElement {
-  constructor() {
-    super();
-    this.reviews = [];
-  }
+import React from "react";
+import Rating from "../Rating";
 
-  set reviewsList(reviews) {
-    this.reviews = reviews;
-  }
+const ReviewsList = ({ reviews = [] }) => {
+  return (
+    <div className="d-flex flex-column">
+      {reviews.map((item, index) => {
+        return (
+          <div className="d-flex align-center review-item" key={index}>
+            <Rating defaultRating={item.rating} />
+            <div>
+              <p className="review-comment">
+                <span className="text-primary bold rating-val">
+                  {item.rating},
+                </span>
+                {item.comment}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
-  render() {
-    const reviewList = this.reviews
-      .map((item) => {
-        return `<div class="d-flex align-center review-item">
-              <rating-c class="" rating="${item.rating}"></rating-c>
-              <div>
-                <p class="review-comment">
-                 <span class="text-primary bold rating-val">${item.rating},</span>${item.comment}
-                </p>
-              </div>
-        </div>`;
-      })
-      .join(" ");
-    return `
-      <div class="d-flex flex-column">
-        ${reviewList}
-      </div>
-    `;
-  }
-}
-
-window.customElements.define("review-list", ReviewsList);
+export default ReviewsList;
