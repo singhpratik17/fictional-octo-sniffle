@@ -1,9 +1,9 @@
 import React from "react";
 import { queryWrapper } from "../../apiConfig";
-import { CREATE_REVIEW } from "../../apiConfig/mutation";
 import Rating from "../Rating";
 import Button from "../Button";
 import { useState } from "react";
+import { CREATE_REVIEW } from "../../apiConfig/mutation";
 
 const AddReview = ({
   productId,
