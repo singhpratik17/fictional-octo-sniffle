@@ -8,11 +8,14 @@ import { useMutation } from "@apollo/client";
 const AddReview = ({ productId, open = false, handleClose = () => null }) => {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+
   const [createReview, { data, loading, error }] = useMutation(CREATE_REVIEW, {
     onCompleted: () => {
-      setRating(0);
-      setComment("");
       handleClose();
+      setRating(0);
+      setHover(0);
+      setComment("");
     },
   });
 
@@ -46,6 +49,9 @@ const AddReview = ({ productId, open = false, handleClose = () => null }) => {
           <Rating
             editable={true}
             handleRating={(rating) => setRating(rating)}
+            setHover={(rating) => setHover(rating)}
+            hover={hover}
+            defaultRating={rating}
           />
           <p className="f-24 mt-40">Review</p>
           <textarea

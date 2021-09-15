@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Rating = ({
   defaultRating,
   editable = false,
   handleRating = () => null,
+  setHover = () => null,
+  hover = 0,
 }) => {
-  const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(0);
-
-  useEffect(() => {
-    if (defaultRating) {
-      setRating(defaultRating * 2);
-    }
-  }, [defaultRating]);
-
   const handleClick = (index) => {
     if (editable) {
       let rating = parseInt(index);
-      setRating(rating);
       handleRating(rating / 2);
     }
   };
@@ -31,9 +23,9 @@ const Rating = ({
               key={index}
               onClick={() => handleClick(index + 1)}
               onMouseOver={() => (editable ? setHover(index + 1) : null)}
-              onMouseOut={() => (editable ? setHover(rating) : null)}
+              onMouseOut={() => (editable ? setHover(defaultRating * 2) : null)}
               className={`fa fa-star-half star ${
-                index < (hover || rating) ? "star-checked" : ""
+                index < (hover || defaultRating * 2) ? "star-checked" : ""
               } ${editable ? "editable-star pointer" : ""} ${
                 index % 2 ? "star-right" : ""
               }`}
