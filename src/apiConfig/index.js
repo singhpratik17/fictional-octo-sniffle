@@ -1,11 +1,8 @@
-import { GraphQLClient } from "graphql-request";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
-const API_HOST = "https://ratings-server.herokuapp.com/graphql";
+const API_HOST = "http://localhost:4000/graphql";
 
-const client = new GraphQLClient(API_HOST, { headers: {} });
-
-const queryWrapper = async (query, variables) => {
-  return await client.request(query, variables);
-};
-
-export { queryWrapper };
+export const client = new ApolloClient({
+  uri: API_HOST,
+  cache: new InMemoryCache(),
+});

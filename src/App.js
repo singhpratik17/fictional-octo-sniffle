@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { queryWrapper } from "./apiConfig";
 import { GET_PRODUCT } from "./apiConfig/queries";
 import ProductCard from "./components/Product";
 import AddReview from "./components/AddReview";
+import { useLazyQuery } from "@apollo/client";
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({
     reviews: [],
   });
   const [reviewModal, setReviewModal] = useState(false);
+  const [getProduct, { loading }] = useLazyQuery(GET_PRODUCT, {
+    onCompleted: (data) => {
+      setProduct(data.product);
+    },
+  });
 
   useEffect(() => {
-    getProduct();
+    getProductQuery();
   }, []);
 
-  const getProduct = async () => {
-    setLoading(true);
-    const data = await queryWrapper(GET_PRODUCT, { productId: 1 });
-    if (data) {
-      setProduct(data.product);
-    }
-    setLoading(false);
+  const getProductQuery = () => {
+    getProduct({
+      variables: {
+        productId: 1,
+      },
+    });
   };
 
   return !loading ? (
@@ -36,7 +39,6 @@ const App = () => {
         handleClose={() => {
           setReviewModal(false);
         }}
-        getProduct={getProduct}
       />
     </>
   ) : (

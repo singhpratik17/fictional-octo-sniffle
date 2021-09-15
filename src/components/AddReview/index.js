@@ -1,27 +1,27 @@
 import React from "react";
-import { queryWrapper } from "../../apiConfig";
 import Rating from "../Rating";
 import Button from "../Button";
 import { useState } from "react";
 import { CREATE_REVIEW } from "../../apiConfig/mutation";
+import { useMutation } from "@apollo/client";
 
-const AddReview = ({
-  productId,
-  open = false,
-  handleClose = () => null,
-  getProduct = () => null,
-}) => {
+const AddReview = ({ productId, open = false, handleClose = () => null }) => {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
+  const [createReview, { data, loading, error }] = useMutation(CREATE_REVIEW, {
+    onCompleted: () => {
+      handleClose();
+    },
+  });
 
   const addReview = async () => {
-    await queryWrapper(CREATE_REVIEW, {
-      comment,
-      rating,
-      productId,
+    await createReview({
+      variables: {
+        comment,
+        rating,
+        productId,
+      },
     });
-    getProduct();
-    handleClose();
   };
 
   return (
