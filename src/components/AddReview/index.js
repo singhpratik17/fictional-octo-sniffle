@@ -10,6 +10,8 @@ const AddReview = ({ productId, open = false, handleClose = () => null }) => {
   const [rating, setRating] = useState(0);
   const [createReview, { data, loading, error }] = useMutation(CREATE_REVIEW, {
     onCompleted: () => {
+      setRating(0);
+      setComment("");
       handleClose();
     },
   });
