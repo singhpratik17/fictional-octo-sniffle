@@ -29,11 +29,11 @@ const Rating = ({
           <span
             key={index}
             onClick={() => handleClick(index + 1)}
-            onMouseOver={() => setHover(index + 1)}
-            onMouseOut={() => setHover(rating)}
+            onMouseOver={() => (editable ? setHover(index + 1) : null)}
+            onMouseOut={() => (editable ? setHover(rating) : null)}
             className={`fa fa-star star ${
               index < (hover || rating) ? "star-checked" : ""
-            } ${editable ? "editable-star" : ""}`}
+            } ${editable ? "editable-star pointer" : ""}`}
           />
         );
       })}
