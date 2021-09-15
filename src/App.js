@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { GET_PRODUCT } from "./apiConfig/queries";
 import ProductCard from "./components/Product";
 import AddReview from "./components/AddReview";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useSubscription } from "@apollo/client";
+import { REVIEW_SUBSCRIPTION } from "./apiConfig/subscription";
 
 const App = () => {
   const [product, setProduct] = useState({
@@ -12,6 +13,20 @@ const App = () => {
   const [getProduct, { loading }] = useLazyQuery(GET_PRODUCT, {
     onCompleted: (data) => {
       setProduct(data.product);
+    },
+  });
+
+  useSubscription(REVIEW_SUBSCRIPTION, {
+    variables: { productId: 1 },
+    onSubscriptionData: ({ subscriptionData }) => {
+      if (subscriptionData.data.reviewCreated) {
+        const { rating, reviews } = subscriptionData.data.reviewCreated;
+        setProduct({
+          ...product,
+          rating,
+          reviews,
+        });
+      }
     },
   });
 
