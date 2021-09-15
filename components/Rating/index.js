@@ -1,69 +1,37 @@
-class Rating extends HTMLElement {
-  constructor() {
-    super();
-    this.rating = 0;
-    this.maxRating = 5;
-    this.mode = "";
-  }
+import React, { useEffect, useState } from "react";
 
-  connectedCallback() {
-    this.rating = this.getAttribute("rating");
-    this.mode = this.getAttribute("mode");
-    this.render();
-    if (this.mode === "editable") {
-      const handleMouseOver = (event) => {
-        addClasses(event.target.id);
-      };
-      const handleMouseOut = (event) => {
-        removeClasses(event.target.id);
-      };
-      const allStars = document.querySelectorAll(".editable-star");
+const Rating = ({ defaultRating, editable = false }) => {
+  const [rating, setRating] = useState(0);
 
-      const addClasses = (index) => {
-        allStars.forEach((item) => {
-          if (parseInt(item.id) <= parseInt(index)) {
-            item.classList.add("star-checked");
-          } else {
-            item.classList.remove("star-checked");
-          }
-        });
-      };
-
-      const removeClasses = (index) => {
-        allStars.forEach((item) => {
-          if (parseInt(item.id) <= parseInt(index)) {
-            item.classList.remove("star-checked");
-          }
-        });
-      };
-
-      allStars.forEach((item) => {
-        item.addEventListener("mouseenter", handleMouseOver);
-        item.addEventListener("mouseleave", handleMouseOut);
-        item.addEventListener("click", (event) => {
-          addClasses(event.target.id);
-          item.removeEventListener("mouseleave", handleMouseOut);
-        });
-      });
+  useEffect(() => {
+    if (defaultRating) {
+      setRating(defaultRating);
     }
-  }
+  }, [defaultRating]);
 
-  render() {
-    const stars = Array.from({ length: this.maxRating })
-      .map((item, index) => {
-        return `<span class="fa fa-star star ${
-          index < this.rating ? "star-checked" : ""
-        }${
-          this.mode === "editable" ? "editable-star" : ""
-        }" id=${index}></span>`;
-      })
-      .join(" ");
-    this.innerHTML = `
-      <div>
-        ${stars}
-      </div>
-    `;
-  }
-}
+  const handleMouseOver = (index) => {
+    if (editable) {
+      setRating(parseInt(index));
+    }
+  };
 
-window.customElements.define("rating-c", Rating);
+  return (
+    <div>
+      {Array.from({ length: 5 }).map((item, index) => {
+        return (
+          <span
+            key={index}
+            onClick={() => handleMouseOver(index)}
+            onMouseOver={() => handleMouseOver(index)}
+            onMouseOut={() => handleMouseOver(index)}
+            className={`fa fa-star star ${
+              index <= rating ? "star-checked" : ""
+            }`}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+export default Rating;

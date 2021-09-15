@@ -1,21 +1,11 @@
-class Button extends HTMLElement {
-  constructor() {
-    super();
-    this.label = "Add review";
-  }
+import React from "react";
 
-  async connectedCallback() {
-    this.label = this.getAttribute("label");
-    this.render();
-  }
+const Button = ({ label = "Add review", handleClick = () => null }) => {
+  return (
+    <div className="btn" onClick={handleClick}>
+      {label}
+    </div>
+  );
+};
 
-  render() {
-    this.innerHTML = `
-      <div class="btn">
-        ${this.label}
-      </div>
-    `;
-  }
-}
-
-window.customElements.define("button-c", Button);
+export default Button;

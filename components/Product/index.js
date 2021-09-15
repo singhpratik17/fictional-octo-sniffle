@@ -5,7 +5,8 @@ import "../Rating/index";
 import "../Button/index";
 import "../ReviewsList/index";
 import "../AddReview/index";
-import { ReviewsList } from "../ReviewsList";
+import Rating from "../Rating";
+import Button from "../Button";
 
 const ProductCard = () => {
   const [product, setProduct] = useState({
@@ -32,9 +33,10 @@ const ProductCard = () => {
             <div className="d-flex justify-start align-center">
               <p className="heading">{product.rating}</p>
               <div className="star-container-header">
+                <Rating defaultRating={product.rating} />
               </div>
             </div>
-            {/*<button-c label="Add review" id="add-review-button"></button-c>*/}
+            <Button />
           </div>
           <hr />
         </div>
