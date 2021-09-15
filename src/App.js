@@ -21,11 +21,12 @@ const App = () => {
     onSubscriptionData: ({ subscriptionData }) => {
       if (subscriptionData.data.reviewCreated) {
         const { rating, reviews } = subscriptionData.data.reviewCreated;
-        setProduct({
+        const data = {
           ...product,
           rating,
           reviews,
-        });
+        };
+        setProduct(data);
       }
     },
   });

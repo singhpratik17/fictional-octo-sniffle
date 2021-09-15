@@ -2,8 +2,8 @@ import { ApolloClient, HttpLink, InMemoryCache, split } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-const API_HOST = "http://localhost:4000/graphql";
-const WS_HOST = "ws://localhost:4000/graphql";
+const API_HOST = "https://ratings-server.herokuapp.com/graphql";
+const WS_HOST = "wss://ratings-server.herokuapp.com/graphql";
 
 const wsLink = new WebSocketLink({
   uri: WS_HOST,
