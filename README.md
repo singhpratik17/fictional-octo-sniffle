@@ -1,10 +1,8 @@
-# bookish-octo-tribble
+# fictional-octo-sniffle
 
 ## Stack
-- NodeJs
-- Apollo-server(graphql) with express.
-- Postgres
+- React
+- Apollo-client
 
 ## Scripts
-- `yarn dev` - Start the server in dev mode.
-- `yarn start` - Start the server in production mode.
+- `yarn start` - Start the server in dev mode.
