@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { queryWrapper } from "../../apiConfig/index";
 import { GET_PRODUCT } from "../../apiConfig/queries";
 import "../Rating/index";
@@ -6,59 +7,50 @@ import "../ReviewsList/index";
 import "../AddReview/index";
 import { ReviewsList } from "../ReviewsList";
 
-class ProductCard extends HTMLElement {
-  constructor() {
-    super();
-    this.product = {
-      reviews: [],
-    };
-    this.reviewComp = "";
-  }
+const ProductCard = () => {
+  const [product, setProduct] = useState({
+    reviews: [],
+  });
 
-  async connectedCallback() {
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  const getProduct = async () => {
     const data = await queryWrapper(GET_PRODUCT, { productId: 1 });
     if (data) {
-      this.product = data.product;
-      if (this.product.reviews.length) {
-        const ReviewList = new ReviewsList();
-        ReviewList.reviewsList = this.product.reviews;
-        this.reviewComp = ReviewList.render();
-      }
+      setProduct(data.product);
     }
-    this.render();
+  };
 
-    const button = document.getElementById("add-review-button");
-    button.addEventListener("click", () => {
-      document.querySelector("add-review").open = true;
-    });
-  }
-
-  render() {
-    this.innerHTML = `
-      <div class="d-flex flex-column align-center">
-        <div class="d-flex flex-column align-center container">
-          <div class="d-flex flex-column w-100">
-            <h1 class="heading bold">${this.product.name}</h1>
-            <div class="d-flex justify-between rating-row align-center">
-              <div class="d-flex justify-start align-center">
-                <p class="heading">${this.product.rating}</p>  
-                <rating-c class="star-container-header" rating="${this.product.rating}"></rating-c>
-              </div>    
-              <button-c label="Add review" id="add-review-button"></button-c>  
+  return (
+    <div className="d-flex flex-column align-center">
+      <div className="d-flex flex-column align-center container">
+        <div className="d-flex flex-column w-100">
+          <h1 className="heading bold">{product.name}</h1>
+          <div className="d-flex justify-between rating-row align-center">
+            <div className="d-flex justify-start align-center">
+              <p className="heading">{product.rating}</p>
+              <div className="star-container-header">
+              </div>
             </div>
-            <hr />
+            {/*<button-c label="Add review" id="add-review-button"></button-c>*/}
           </div>
-          <div class="d-flex flex-column w-100">
-            <h1 class="heading sub-heading bold">Reviews</h1>
-            <div class="reviews-container">
-                ${this.reviewComp}
-            </div>
-          </div>
+          <hr />
         </div>
-        <add-review id="add-review-modal" productId="${this.product.id}"></add-review>
+        <div className="d-flex flex-column w-100">
+          <h1 className="heading sub-heading bold">Reviews</h1>
+          {/*<div className="reviews-container">*/}
+          {/*  ${this.reviewComp}*/}
+          {/*</div>*/}
+        </div>
       </div>
-    `;
-  }
-}
+      {/*<add-review*/}
+      {/*  id="add-review-modal"*/}
+      {/*  productId="${this.product.id}"*/}
+      {/*></add-review>*/}
+    </div>
+  );
+};
 
-window.customElements.define("product-card", ProductCard);
+export default ProductCard;
