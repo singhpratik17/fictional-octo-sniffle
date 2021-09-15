@@ -61,6 +61,7 @@ const AddReview = ({ productId, open = false, handleClose = () => null }) => {
             className="review-input"
             id="review-comment-input"
             onChange={(evt) => setComment(evt.target.value)}
+            value={comment}
           />
           <div className="mt-40">
             <Button label="Submit review" handleClick={() => addReview()} />
