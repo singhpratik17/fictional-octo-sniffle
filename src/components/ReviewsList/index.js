@@ -3,7 +3,7 @@ import Rating from "../Rating";
 
 const ReviewsList = ({ reviews = [] }) => {
   return (
-    <div className="d-flex flex-column">
+    <div className="d-flex flex-column reviews-container">
       {reviews.map((item, index) => {
         return (
           <div className="d-flex align-center review-item" key={index}>
