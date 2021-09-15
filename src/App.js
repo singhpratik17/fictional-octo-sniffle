@@ -5,6 +5,7 @@ import ProductCard from "./components/Product";
 import AddReview from "./components/AddReview";
 
 const App = () => {
+  const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState({
     reviews: [],
   });
@@ -15,13 +16,15 @@ const App = () => {
   }, []);
 
   const getProduct = async () => {
+    setLoading(true);
     const data = await queryWrapper(GET_PRODUCT, { productId: 1 });
     if (data) {
       setProduct(data.product);
     }
+    setLoading(false);
   };
 
-  return (
+  return !loading ? (
     <>
       <ProductCard
         product={product}
@@ -36,6 +39,8 @@ const App = () => {
         getProduct={getProduct}
       />
     </>
+  ) : (
+    <div className="d-flex justify-center mt-40">Getting product...</div>
   );
 };
 
