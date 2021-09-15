@@ -10,7 +10,7 @@ const Rating = ({
 
   useEffect(() => {
     if (defaultRating) {
-      setRating(defaultRating);
+      setRating(defaultRating * 2);
     }
   }, [defaultRating]);
 
@@ -18,23 +18,27 @@ const Rating = ({
     if (editable) {
       let rating = parseInt(index);
       setRating(rating);
-      handleRating(rating);
+      handleRating(rating / 2);
     }
   };
 
   return (
     <div>
-      {Array.from({ length: 5 }).map((item, index) => {
+      {Array.from({ length: 10 }).map((item, index) => {
         return (
-          <span
-            key={index}
-            onClick={() => handleClick(index + 1)}
-            onMouseOver={() => (editable ? setHover(index + 1) : null)}
-            onMouseOut={() => (editable ? setHover(rating) : null)}
-            className={`fa fa-star star ${
-              index < (hover || rating) ? "star-checked" : ""
-            } ${editable ? "editable-star pointer" : ""}`}
-          />
+          <React.Fragment key={index}>
+            <span
+              key={index}
+              onClick={() => handleClick(index + 1)}
+              onMouseOver={() => (editable ? setHover(index + 1) : null)}
+              onMouseOut={() => (editable ? setHover(rating) : null)}
+              className={`fa fa-star-half star ${
+                index < (hover || rating) ? "star-checked" : ""
+              } ${editable ? "editable-star pointer" : ""} ${
+                index % 2 ? "star-right" : ""
+              }`}
+            />
+          </React.Fragment>
         );
       })}
     </div>
